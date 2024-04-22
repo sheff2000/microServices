@@ -20,6 +20,6 @@ note_servers - заметки
 для храниения паролей и логина к БД 
 <pre>
 dotnet user-secrets init
-dotnet user-secrets set "MongoDB:Username" "yourUsername"
-dotnet user-secrets set "MongoDB:Password" "yourPassword"
+dotnet user-secrets export MongoDB_Username=myUsername
+dotnet user-secrets export MongoDB_Password=myPassword
 </pre>

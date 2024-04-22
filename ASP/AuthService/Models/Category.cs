@@ -8,10 +8,10 @@ namespace AuthService.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         [BsonElement("nameCategory")]
-        public string NameCategory { get; set; }
+        public string? NameCategory { get; set; }
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
