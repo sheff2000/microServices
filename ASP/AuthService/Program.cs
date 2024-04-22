@@ -1,5 +1,18 @@
 var builder = WebApplication.CreateBuilder(args);
 
+// Получение конфигурации
+var username = builder.Configuration["MongoDB:Username"];
+var password = builder.Configuration["MongoDB:Password"];
+var connectionString = builder.Configuration.GetConnectionString("MongoDB")
+    .Replace("{username}", username)
+    .Replace("{password}", password);
+
+var mongoClient = new MongoClient(connectionString);
+var database = mongoClient.GetDatabase(builder.Configuration["MongoDB:DatabaseName"]);
+
+// Регистрация базы данных как сервиса
+builder.Services.AddSingleton<IMongoDatabase>(database);
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
