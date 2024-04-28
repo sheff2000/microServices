@@ -22,10 +22,13 @@ namespace AuthService.Models
         [BsonElement("user")]
         public string UserId { get; set; }= string.Empty;
 
-        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+         [BsonElement("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
-        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
-    }
+        [BsonElement("updatedAt")]
+        public DateTime UpdatedAt { get; set; }
+
+        [BsonElement("__v")]
+        public Int32 __v { get; set; }
+        }
 }
