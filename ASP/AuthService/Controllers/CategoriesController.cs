@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using AuthService.Models;
 using AuthService.Data;
 using MongoDB.Driver;
@@ -9,7 +11,7 @@ using System;
 
 namespace AuthService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("category")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {

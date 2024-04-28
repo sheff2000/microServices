@@ -17,9 +17,11 @@ namespace AuthService.Models
         public string Text { get; set; }= string.Empty;
 
         [BsonElement("category")]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string CategoryId { get; set; }= string.Empty;
 
         [BsonElement("user")]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string UserId { get; set; }= string.Empty;
 
          [BsonElement("createdAt")]
