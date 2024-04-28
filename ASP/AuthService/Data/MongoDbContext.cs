@@ -7,14 +7,20 @@ namespace AuthService.Data
     {
         private readonly IMongoDatabase _database;
 
-        public MongoDbContext(IConfiguration configuration)
+        public MongoDbContext(IMongoClient mongoClient)
         {
-            var client = new MongoClient(configuration["MongoDB:ConnectionString"]);
-            _database = client.GetDatabase(configuration["MongoDB:DatabaseName"]);
+            _database = mongoClient.GetDatabase("test");
         }
 
-        public IMongoCollection<User> Users => _database.GetCollection<User>("users");
-        public IMongoCollection<Category> Categories => _database.GetCollection<Category>("categories");
-        public IMongoCollection<Note> Notes => _database.GetCollection<Note>("notes");
+        // Пример метода для получения коллекции из базы данных
+        public IMongoCollection<TDocument> GetCollection<TDocument>(string name)
+        {
+            return _database.GetCollection<TDocument>(name);
+        }
+
+
+        public IMongoCollection<User> Users => _database.GetCollection<User>("user_servers");
+        public IMongoCollection<Category> Categories => _database.GetCollection<Category>("category_servers");
+        public IMongoCollection<Note> Notes => _database.GetCollection<Note>("note_servers");
     }
 }

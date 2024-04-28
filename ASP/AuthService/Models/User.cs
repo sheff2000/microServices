@@ -1,28 +1,27 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System;
 
-namespace AuthService.Models
+public class User
 {
-    public class User
-    {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string? Id { get; set; } 
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string Id { get; set; }
 
-        [BsonElement("username")]
-        public string Username { get; set; } = string.Empty;
+    [BsonElement("username")]
+    public string? Username { get; set; }
 
-        [BsonElement("password")]
-        public string Password { get; set; } = string.Empty;
+    [BsonElement("password")]
+    public string? Password { get; set; }
 
-        [BsonElement("role")]
-        public string Role { get; set; } = "user";
+    [BsonElement("role")]
+    public string? Role { get; set; }
 
-        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+    [BsonElement("createdAt")]
+    public DateTime CreatedAt { get; set; }
 
-        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
-    }
+    [BsonElement("updatedAt")]
+    public DateTime UpdatedAt { get; set; }
+
+    [BsonElement("__v")]
+    public Int32 __v { get; set; }
 }

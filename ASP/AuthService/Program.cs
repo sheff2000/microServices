@@ -1,25 +1,21 @@
-using MongoDB.Driver;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using AuthService.Data;
+using MongoDB.Driver;
+using MongoDB.Bson;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Проверка и получение конфигурации
-var username = Environment.GetEnvironmentVariable("MongoDB_Username");
-var password = Environment.GetEnvironmentVariable("MongoDB_Password");
-var connectionString = builder.Configuration["MongoDB:ConnectionString"]
-    .Replace("{username}", username)
-    .Replace("{password}", password);
-
+// Конфигурация MongoDB
+const string connectionString = "mongodb+srv://admindb:A7uqus5-=4-UhC-@test-projects-cluster.qqhcelg.mongodb.net/?retryWrites=true&w=majority&appName=test-projects-cluster";
+var databaseName = builder.Configuration["MongoDB:DatabaseName"];
 var mongoClient = new MongoClient(connectionString);
-var database = mongoClient.GetDatabase(builder.Configuration["MongoDB:DatabaseName"]);
 
-
-// Регистрация базы данных как сервиса
-builder.Services.AddSingleton<IMongoDatabase>(database);
-builder.Services.AddSingleton<MongoDbContext>();
+// Регистрация MongoDB services
+builder.Services.AddSingleton<IMongoClient>(mongoClient);
+builder.Services.AddScoped<MongoDbContext>(serviceProvider =>
+    new MongoDbContext(mongoClient));
 
 // Настройка JWT
 builder.Services.AddAuthentication(options =>
@@ -56,7 +52,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
