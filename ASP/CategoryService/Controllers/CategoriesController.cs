@@ -2,14 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using AuthService.Models;
-using AuthService.Data;
+using CategoryService.Models;
+using CategoryService.Data;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 
-namespace AuthService.Controllers
+namespace CategoryService.Controllers
 {
     [Route("category")]
     [ApiController]
